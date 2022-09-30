@@ -4,4 +4,6 @@
     <string name="btn_signup">Create new account</string>
     <string name="header_splash">Greatest library for sweet dreams</string>
     <string name="content_splash">There are over 1000 audio fairy stories from around from the world from our app </string>
+    <string name="question_account">Dont you have an account yet?</string>
+    <string name="create_account"><u>Create new account now</u></string>
 </resources>

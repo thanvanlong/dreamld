@@ -1,28 +1,22 @@
 package com.example.dreamtale.ui.login;
 
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseActivity;
 import com.example.dreamtale.base.BasePresenter;
-import com.example.dreamtale.dto.ContentSplash;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import me.relex.circleindicator.CircleIndicator2;
-import me.relex.circleindicator.CircleIndicator3;
 
 public class SplashActivity extends BaseActivity<LoginActivityPresenter> {
-    @BindView(R.id.rcy_splash)
-    protected ViewPager2 rcySplash;
-    @BindView(R.id.indicator)
-    protected CircleIndicator3 indicator;
+    private boolean mIsInitialed = false;
+    private static SplashActivity mInstance;
 
-    private SplashAdapter splashAdapter;
-    private  List<ContentSplash> splashList;
+    public static SplashActivity getmInstance() {
+        return mInstance;
+    }
 
+    public static void setmInstance(SplashActivity mInstance) {
+        SplashActivity.mInstance = mInstance;
+    }
 
     @Override
     public int getLayoutId() {
@@ -31,17 +25,31 @@ public class SplashActivity extends BaseActivity<LoginActivityPresenter> {
 
     @Override
     public void onPrepareLayout() {
-        splashList = new ArrayList<>();
-        splashList.add(new ContentSplash());
-        splashList.add(new ContentSplash());
-        splashList.add(new ContentSplash());
-        splashAdapter = new SplashAdapter(splashList);
-        rcySplash.setAdapter(splashAdapter);
-        indicator.setViewPager(rcySplash);
+        if (!mIsInitialed) {
+            SplashFragmentContent splashFragmentContent = new SplashFragmentContent();
+            SplashFragmentHeader splashFragmentHeader = new SplashFragmentHeader(R.string.app_name);
+            SplashFragmentFooter splashFragmentFooter = new SplashFragmentFooter();
+            addFragment(R.id.frg_splash_content, splashFragmentContent, null, false, "CONTENT_VIEWPAGER");
+            addFragment(R.id.frg_splash_header, splashFragmentHeader, null,  false, "Header");
+            addFragment(R.id.frg_splash_footer, splashFragmentFooter, null, false, "Footer");
+            mIsInitialed = true;
+            setmInstance(this);
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
     public BasePresenter onCreatePresenter() {
         return null;
+    }
+
+    @Override
+    public BaseActivity getViewContext() {
+        return this.getViewContext();
     }
 }

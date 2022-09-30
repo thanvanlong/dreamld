@@ -33,7 +33,7 @@ public class SplashAdapter extends RecyclerView.Adapter<SplashAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mBackground.setImageResource(R.drawable.bg_splash);
+        holder.mBackground.setImageResource(R.drawable.img_bookshelf);
         holder.mHeaderSplash.setText("Greatest library for sweet dreams");
         holder.mContentSplash.setText("There are over 1000 audio fairy stories from around from the world from our app");
     }

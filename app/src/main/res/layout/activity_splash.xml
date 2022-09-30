@@ -5,71 +5,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/dark_blue">
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frg_splash_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:fontFamily="@font/manofik_bold"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:gravity="center"
-            android:layout_marginTop="30dp"/>
-    </LinearLayout>
+        android:layout_height="wrap_content">
+    </FrameLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/rcy_splash"
+        <FrameLayout
+            android:id="@+id/frg_splash_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            app:ci_drawable="@drawable/circle_indicator"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/layout_account"/>
-        <LinearLayout
-            android:id="@+id/layout_account"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/rcy_splash"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/frg_splash_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:layout_marginBottom="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:backgroundTint="@color/yellow"
-                android:elevation="10dp"
-                android:fontFamily="@font/gt_walshiem"
-                android:shadowColor="@color/black"
-                android:text="@string/btn_login"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <Button
-                android:id="@+id/btn_signup"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:backgroundTint="@color/light_blue"
-                android:elevation="10dp"
-                android:fontFamily="@font/gt_walshiem"
-                android:shadowColor="@color/black"
-                android:text="@string/btn_signup"
-                android:textSize="15sp" />
-        </LinearLayout>
+<!--            <include layout="@layout/fragment_splash_footer" />-->
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
