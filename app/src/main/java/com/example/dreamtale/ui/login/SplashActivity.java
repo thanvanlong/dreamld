@@ -1,15 +1,24 @@
 package com.example.dreamtale.ui.login;
 
 
+import android.annotation.SuppressLint;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseActivity;
 import com.example.dreamtale.base.BasePresenter;
 
+import butterknife.BindView;
 
-public class SplashActivity extends BaseActivity<LoginActivityPresenter> {
+
+public class SplashActivity extends BaseActivity<LoginPresenter> {
     private boolean mIsInitialed = false;
     private static SplashActivity mInstance;
 
+    @BindView(R.id.layout_container)
+    LinearLayout linearLayout;
     public static SplashActivity getmInstance() {
         return mInstance;
     }
@@ -20,21 +29,30 @@ public class SplashActivity extends BaseActivity<LoginActivityPresenter> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_splash;
+        return R.layout.test_bg_btn;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onPrepareLayout() {
-        if (!mIsInitialed) {
+        if (mIsInitialed) {
             SplashFragmentContent splashFragmentContent = new SplashFragmentContent();
             SplashFragmentHeader splashFragmentHeader = new SplashFragmentHeader(R.string.app_name);
             SplashFragmentFooter splashFragmentFooter = new SplashFragmentFooter();
-            addFragment(R.id.frg_splash_content, splashFragmentContent, null, false, "CONTENT_VIEWPAGER");
-            addFragment(R.id.frg_splash_header, splashFragmentHeader, null,  false, "Header");
-            addFragment(R.id.frg_splash_footer, splashFragmentFooter, null, false, "Footer");
+            addFragment(R.id.frg_splash_content, splashFragmentContent, null, false, SplashFragmentContent.class.getSimpleName());
+            addFragment(R.id.frg_splash_header, splashFragmentHeader, null,  false, SplashFragmentHeader.class.getSimpleName());
+            addFragment(R.id.frg_splash_footer, splashFragmentFooter, null, false, SplashFragmentFooter.class.getSimpleName());
             mIsInitialed = true;
             setmInstance(this);
         }
+
+        linearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideSoftKeyboard();
+                return false;
+            }
+        });
     }
 
 

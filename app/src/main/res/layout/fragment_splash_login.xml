@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
+    <Button
+        android:id="@+id/btn_login_fb"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_btn_cancel"
+        android:elevation="10dp"
+        android:fontFamily="@font/gt_walshiem"
+        android:shadowColor="@color/black"
+        android:text="@string/login_facebook"
+        android:textSize="15sp" />
+    <Button
+        android:id="@+id/btn_login_gg"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_btn_cancel"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/gt_walshiem"
+        android:shadowColor="@color/black"
+        android:text="@string/login_google"
+        android:textSize="15sp" />
+    <LinearLayout
+        android:id="@+id/container_edt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gt_walshiem"
+            android:layout_margin="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/bg_edittext"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/container_edt_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Passowrd"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gt_walshiem"
+            android:layout_margin="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/bg_edittext"/>
+    </LinearLayout>
+</LinearLayout>

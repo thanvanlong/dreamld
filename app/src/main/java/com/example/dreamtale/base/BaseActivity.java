@@ -1,12 +1,16 @@
 package com.example.dreamtale.base;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.dreamtale.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -49,7 +53,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         addFragment(containerId, fragment, addToBackStack, tag);
     }
 
-    public void addFragment(int containerId ,Fragment fragment, boolean addToBackStack, String tag ){
+    public void addFragment(int containerId, Fragment fragment, boolean addToBackStack, String tag ){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         fragmentTransaction.add(containerId, fragment, tag);
@@ -62,4 +66,48 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     }
 
+    public void replaceFragment(int containerId, Fragment fragment, String tag) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(containerId, fragment, tag);
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    public void addFragmentWithTransition(int containerId, Fragment fragment, boolean addToBackStack, String tag) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(
+                R.anim.anim_enter_from_right,
+                R.anim.anim_exit_to_left,
+                R.anim.anim_enter_from_left,
+                R.anim.anim_exit_to_right);
+        fragmentTransaction.add(containerId, fragment, tag);
+
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    public void replaceFragmentWithTransition(int containerId, Fragment fragment, boolean addToBackStack, String tag) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.anim_enter_from_right, R.anim.anim_exit_to_left, R.anim.anim_enter_from_left, R.anim.anim_exit_to_right);
+        fragmentTransaction.replace(containerId, fragment, tag);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
+        }
+
+        fragmentTransaction.commit();
+    }
+
+    public void hideSoftKeyboard() {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.hideSoftInputFromWindow(
+                    getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
+    }
 }

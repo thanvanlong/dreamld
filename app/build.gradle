@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdk 32
-
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.example.dreamtale"
         minSdk 21
@@ -16,10 +16,28 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        dev {
+            buildConfigField("String", "BASE_URL", "\"https://6240-2402-9d80-26f-4db9-66a5-44fe-e9d1-ec16.ap.ngrok.io\"")
+        }
+
+        product {
+            buildConfigField("String", "BASE_URL", "\"https://localhost/\"")
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,4 +59,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 }

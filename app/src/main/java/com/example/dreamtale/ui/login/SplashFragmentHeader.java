@@ -8,7 +8,7 @@ import com.example.dreamtale.base.BaseFragment;
 
 import butterknife.BindView;
 
-public class SplashFragmentHeader extends BaseFragment<LoginActivityPresenter, SplashActivity> {
+public class SplashFragmentHeader extends BaseFragment<LoginPresenter, SplashActivity> {
 
     @BindView(R.id.img_header)
     protected ImageView imgHeader;
@@ -17,14 +17,34 @@ public class SplashFragmentHeader extends BaseFragment<LoginActivityPresenter, S
 
     private int mImgHeader;
     private int mTxtHeader;
+    private static SplashFragmentHeader mInstance;
 
-    public SplashFragmentHeader(int mImgHeader, int mTxtHeader) {
-        this.mImgHeader = mImgHeader;
-        this.mTxtHeader = mTxtHeader;
+    public static SplashFragmentHeader getmInstance() {
+        return mInstance;
+    }
+
+    public static void setmInstance(SplashFragmentHeader mInstance) {
+        SplashFragmentHeader.mInstance = mInstance;
     }
 
     public SplashFragmentHeader(int mTxtHeader) {
         this.mTxtHeader = mTxtHeader;
+    }
+
+    public ImageView getImgHeader() {
+        return imgHeader;
+    }
+
+    public void setImgHeader(ImageView imgHeader) {
+        this.imgHeader = imgHeader;
+    }
+
+    public TextView getTxtHeader() {
+        return txtHeader;
+    }
+
+    public void setTxtHeader(TextView txtHeader) {
+        this.txtHeader = txtHeader;
     }
 
     @Override
@@ -34,16 +54,11 @@ public class SplashFragmentHeader extends BaseFragment<LoginActivityPresenter, S
 
     @Override
     public void onPrepareLayout() {
-        if (mImgHeader != -1 ) {
-            imgHeader.setImageResource(mImgHeader);
-        }
-        if (mTxtHeader != -1) {
-            txtHeader.setText(getString(mTxtHeader));
-        }
+        setmInstance(this);
     }
 
     @Override
-    public LoginActivityPresenter onCreatePresenter() {
+    public LoginPresenter onCreatePresenter() {
         return null;
     }
 }

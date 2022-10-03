@@ -1,4 +1,4 @@
-package com.example.dreamtale.dto;
+package com.example.dreamtale.network.dto;
 
 import com.google.gson.annotations.SerializedName;
 

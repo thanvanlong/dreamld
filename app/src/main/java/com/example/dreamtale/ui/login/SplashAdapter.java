@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamtale.R;
-import com.example.dreamtale.dto.ContentSplash;
+import com.example.dreamtale.network.dto.ContentSplash;
 
 import java.util.List;
 
