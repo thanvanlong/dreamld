@@ -109,7 +109,7 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
         String UNAUTHORIZED = "401";
         String REFRESH_TOKEN = "412";
         String LIMITED_DEVICE  = "LIMIT_DEVICE";
-        String ACCOUNT_EXIST= "USER_EXIST";
+        String ACCOUNT_EXIST= "PHONE_EXIST";
         String ACCOUNT_NON_EXIST = "USER_NON_EXIST";
     }
 }

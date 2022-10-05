@@ -1,7 +1,10 @@
 package com.example.dreamtale.network;
 
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.network.dto.ResponseDTO;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,4 +22,9 @@ public interface DreamService {
     @GET("/api/v1/auth/check-phone/{phone}")
     Call<ResponseDTO<AuthRequestBody>> checkPhoneNumber(@Path("phone") String phoneNumber);
 
+    @GET("/api/v1/device-used")
+    Call<ResponseDTO<List<DeviceInfo>>> getListDeviceLogged();
+
+    @POST("/api/v1/auth/logout")
+    Call<ResponseDTO<List<DeviceInfo>>> logout(@Body List<DeviceInfo> deviceInfo);
 }

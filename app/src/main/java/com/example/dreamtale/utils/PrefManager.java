@@ -27,6 +27,7 @@ public class PrefManager {
         if (preferences != null) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(ACCESS_TOKEN, accessToken);
+            editor.apply();
         }
     }
     public static void saveRefreshTokenInfo(Context context, String refreshToken) {
@@ -37,6 +38,7 @@ public class PrefManager {
         if (preferences != null) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(REFRESH_TOKEN, refreshToken);
+            editor.apply();
         }
     }
 
@@ -58,6 +60,7 @@ public class PrefManager {
         if (preferences != null) {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean(IS_LOGIN, login);
+            editor.apply();
         }
     }
 

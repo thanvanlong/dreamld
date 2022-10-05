@@ -57,13 +57,15 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
             protected void onLimitedDevice(AuthRequestBody body, String message) {
                 super.onLimitedDevice(body, message);
                 DialogUtils.dismissProgressDialog(getViewContext());
-                Log.d("longtv", "onLimitedDevice: " + message);
+                Log.d("longtv", "onLimitedDevice: " + body.getAccessToken());
+                PrefManager.saveAccessTokenInfo(getViewContext(), body.getAccessToken());
                 YesNoDialog yesNoDialog = new YesNoDialog();
                 yesNoDialog.setListener(new YesNoDialog.ItemClickListener() {
                     @Override
                     public void btnYesClick() {
                         yesNoDialog.dismiss();
-                        getListDevice(body.getAccessToken());
+                        Log.d("longtv", "btnYesClick: " + PrefManager.getAccessToken(getViewContext()));
+                        getListDevice();
                     }
 
                     @Override
@@ -127,16 +129,20 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
         });
     }
 
-    private void getListDevice(String authToken) {
-                List<DeviceInfo> deviceInfoList = new ArrayList<>();
-                deviceInfoList.add(DeviceUtils.getDeviceInfo(getViewContext()));
-                deviceInfoList.add(DeviceUtils.getDeviceInfo(getViewContext()));
-                deviceInfoList.add(DeviceUtils.getDeviceInfo(getViewContext()));
-                deviceInfoList.add(DeviceUtils.getDeviceInfo(getViewContext()));
-                deviceInfoList.add(DeviceUtils.getDeviceInfo(getViewContext()));
+    private void getListDevice() {
+        DialogUtils.showProgressDialog(getViewContext());
+        ServiceBuilder.getService().getListDeviceLogged().enqueue(new BaseCallback<List<DeviceInfo>>() {
+            @Override
+            public void onError(String errorCode, String errorMessage) {
+                //TODO handle error
+            }
 
-                DeviceDialogFragment deviceDialogFragment = new DeviceDialogFragment();
-                deviceDialogFragment.init(getViewContext(), deviceInfoList, "null" );
-                deviceDialogFragment.show(getViewContext().getSupportFragmentManager(), "Dialog");
+            @Override
+            public void onResponse(List<DeviceInfo> data) {
+                DialogUtils.dismissProgressDialog(getViewContext());
+                Log.e("longtv", "onResponse: limit device " + data.size() );
+                mView.showListDevices(data);
+            }
+        });
     }
 }

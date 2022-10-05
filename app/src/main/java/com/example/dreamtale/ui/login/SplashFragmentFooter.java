@@ -1,6 +1,5 @@
 package com.example.dreamtale.ui.login;
 
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -9,18 +8,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.example.dreamtale.R;
+import com.example.dreamtale.base.BaseCallback;
 import com.example.dreamtale.base.BaseFragment;
+import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.utils.DeviceUtils;
 import com.example.dreamtale.utils.DialogUtils;
+import com.example.dreamtale.utils.PrefManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import me.relex.circleindicator.CircleIndicator3;
@@ -173,7 +176,7 @@ public class SplashFragmentFooter extends BaseFragment<LoginPresenter, SplashAct
 
     @Override
     public void isPhoneExist(String message) {
-        DialogUtils.showToastMessage(message, getViewContext(), true);
+        DialogUtils.showToastMessage(message, getViewContext(), false);
     }
 
     @Override
@@ -206,7 +209,17 @@ public class SplashFragmentFooter extends BaseFragment<LoginPresenter, SplashAct
     }
 
     @Override
-    public void showListDevices() {
-
+    public void showListDevices(List<DeviceInfo> data) {
+        DeviceDialogFragment deviceDialogFragment = new DeviceDialogFragment();
+        deviceDialogFragment.setListener(new DeviceDialogFragment.DialogDeviceListener() {
+            @Override
+            public void onRemoveSuccess() {
+                getPresenter().doLogin(new AuthRequestBody(SplashFragmentContent.getmInstance().getEdtPhone().getText().toString(),
+                        SplashFragmentContent.getmInstance().getEdtPass().getText().toString(),
+                        DeviceUtils.getDeviceInfo(getViewContext())));
+            }
+        });
+        deviceDialogFragment.init(getViewContext(), data, PrefManager.getAccessToken(getViewContext()));
+        deviceDialogFragment.show(getViewContext().getSupportFragmentManager(), "Dialog");
     }
 }

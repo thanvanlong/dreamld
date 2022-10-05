@@ -14,6 +14,7 @@ import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseFragment;
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.ContentSplash;
+import com.example.dreamtale.network.dto.DeviceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,7 +194,7 @@ public class SplashFragmentContent extends BaseFragment<LoginPresenter, SplashAc
     }
 
     @Override
-    public void showListDevices() {
+    public void showListDevices(List<DeviceInfo> data) {
 
     }
 }

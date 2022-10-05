@@ -37,8 +37,6 @@ public class DeviceInfoAdapter extends RecyclerView.Adapter<DeviceInfoAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DeviceInfo deviceInfo = deviceInfoList.get(position);
-        Log.d("longtv", "onBindViewHolder: adapter " + deviceInfoList.size());
-        Log.d("longtv", "onBindViewHolder: " + deviceInfo.getDeviceId());
         holder.imgTypeDevice.setImageResource(deviceInfo.getDeviceType().equalsIgnoreCase("Phone")
                 ? R.drawable.ic_baseline_phone_iphone_24 : R.drawable.ic_baseline_tablet_mac_24);
         holder.txtTypeDevice.setText(deviceInfo.getDeviceName());

@@ -1,5 +1,7 @@
 package com.example.dreamtale.network;
 
+import android.util.Log;
+
 import com.example.dreamtale.App;
 import com.example.dreamtale.BuildConfig;
 import com.example.dreamtale.utils.PrefManager;
@@ -37,7 +39,7 @@ public class ServiceBuilder {
                         Request original = chain.request();
                         Request.Builder builder = original.newBuilder();
                         builder.addHeader("Content-Type", "application/json");
-                        if (PrefManager.isLogged(App.getInstance())){
+                        if (!PrefManager.getAccessToken(App.getInstance()).matches("")){
                             builder.addHeader("Authorization", "Bearer " + PrefManager.getAccessToken(App.getInstance()));
                         }
                         Request request = builder.method(original.method(), original.body()).build();

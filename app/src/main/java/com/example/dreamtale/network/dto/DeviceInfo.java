@@ -22,6 +22,9 @@ public class DeviceInfo implements Serializable {
 
     private boolean selected = false;
 
+    public DeviceInfo() {
+    }
+
     public DeviceInfo(String deviceId, String deviceType, String osVersion, String deviceName) {
         this.deviceId = deviceId;
         this.deviceType = deviceType;

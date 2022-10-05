@@ -1,6 +1,5 @@
 package com.example.dreamtale.ui.login;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,11 +19,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamtale.R;
+import com.example.dreamtale.base.BaseCallback;
+import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.DeviceInfo;
-import com.example.dreamtale.utils.DeviceUtils;
+import com.example.dreamtale.utils.DialogUtils;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
+import java.lang.reflect.Type;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +48,7 @@ public class DeviceDialogFragment extends DialogFragment {
     private List<DeviceInfo> deviceInfoList;
     private String accessToken;
     private DeviceInfoAdapter deviceInfoAdapter;
-    private RemoveDevicesListener listener;
+    private DialogDeviceListener listener;
     private boolean check = false;
     public void init(Context context ,List<DeviceInfo> list, String accessToken) {
         this.mContext = context;
@@ -50,8 +56,8 @@ public class DeviceDialogFragment extends DialogFragment {
         this.accessToken = accessToken;
     }
 
-    public void setListener(RemoveDevicesListener removeDevicesListener) {
-        this.listener = removeDevicesListener;
+    public void setListener(DialogDeviceListener dialogDeviceListener) {
+        this.listener = dialogDeviceListener;
     }
 
     @Nullable
@@ -87,6 +93,28 @@ public class DeviceDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 //TODO logout devices
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    List<DeviceInfo> infoList = deviceInfoList.stream().filter(deviceInfo -> deviceInfo.isSelected()).collect(Collectors.toList());
+                    Type listType = new TypeToken<List<DeviceInfo>>() {}.getType();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(infoList, listType);
+                    Log.d("longtv", "onClick: " +json);
+                    List<DeviceInfo> target2 = gson.fromJson(json, listType);
+                    Log.d("longtv", "onClick: 1 " + target2.size());
+                    DialogUtils.showProgressDialog(getActivity());
+                    ServiceBuilder.getService().logout(infoList).enqueue(new BaseCallback<List<DeviceInfo>>() {
+                        @Override
+                        public void onError(String errorCode, String errorMessage) {
+                            Log.e("longtv", "onError: logout" );
+                        }
+
+                        @Override
+                        public void onResponse(List<DeviceInfo> data) {
+                            DialogUtils.dismissProgressDialog(getActivity());
+                            listener.onRemoveSuccess();
+                        }
+                    });
+                }
             }
         });
 
@@ -105,7 +133,7 @@ public class DeviceDialogFragment extends DialogFragment {
 
     }
 
-    public interface RemoveDevicesListener {
+    public interface DialogDeviceListener {
         void onRemoveSuccess();
     }
 }

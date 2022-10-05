@@ -2,6 +2,7 @@ package com.example.dreamtale.ui.login;
 
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseActivity;
 import com.example.dreamtale.base.BasePresenter;
+import com.example.dreamtale.utils.PrefManager;
 
 import butterknife.BindView;
 
@@ -29,13 +31,13 @@ public class SplashActivity extends BaseActivity<LoginPresenter> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.test_bg_btn;
+        return R.layout.activity_splash;
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onPrepareLayout() {
-        if (mIsInitialed) {
+        if (!mIsInitialed) {
             SplashFragmentContent splashFragmentContent = new SplashFragmentContent();
             SplashFragmentHeader splashFragmentHeader = new SplashFragmentHeader(R.string.app_name);
             SplashFragmentFooter splashFragmentFooter = new SplashFragmentFooter();

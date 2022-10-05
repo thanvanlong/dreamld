@@ -15,4 +15,10 @@ public class App extends Application {
     public static App getInstance() {
         return sAppInstance;
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        setAppInstance(this);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.dreamtale.ui.login;
 
 import com.example.dreamtale.base.BaseView;
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.DeviceInfo;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface LoginView extends BaseView<LoginPresenter> {
     void onChangePasswordSuccess();
 
     void onLimitedDevice();
-    void showListDevices();
+    void showListDevices(List<DeviceInfo> data);
 }

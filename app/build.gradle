@@ -31,7 +31,7 @@ android {
 
     productFlavors {
         dev {
-            buildConfigField("String", "BASE_URL", "\"https://6240-2402-9d80-26f-4db9-66a5-44fe-e9d1-ec16.ap.ngrok.io\"")
+            buildConfigField("String", "BASE_URL", "\"http://localhost:8080\"")
         }
 
         product {
