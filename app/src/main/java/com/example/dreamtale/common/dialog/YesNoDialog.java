@@ -1,6 +1,7 @@
 package com.example.dreamtale.common.dialog;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,11 +48,21 @@ public class YesNoDialog extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         getDialog().setCanceledOnTouchOutside(false);
-//        @SuppressLint("ResourceType") int width = getResources().getDimensionPixelSize(300);
-        getDialog().getWindow().setLayout(300, 200);
+//        int width = getResources().getDimensionPixelSize(R.dimen.popup_width);
+//        int height = getResources().getDimensionPixelSize(R.dimen.popup_height);
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return inflater.inflate(R.layout.fragment_yes_no_dialog, container, false);
     }
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

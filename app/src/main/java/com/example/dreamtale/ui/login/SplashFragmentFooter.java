@@ -11,8 +11,10 @@ import android.widget.Toast;
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseCallback;
 import com.example.dreamtale.base.BaseFragment;
+import com.example.dreamtale.common.dialog.YesNoDialog;
 import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.Category;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.utils.DeviceUtils;
 import com.example.dreamtale.utils.DialogUtils;
@@ -160,6 +162,8 @@ public class SplashFragmentFooter extends BaseFragment<LoginPresenter, SplashAct
     @Override
     public void loginSuccess(AuthRequestBody data) {
         Toast.makeText(getViewContext(), data.toString(), Toast.LENGTH_SHORT).show();
+        btnLogin.setTag("next_category");
+        //TODO handle login success
     }
 
     @Override

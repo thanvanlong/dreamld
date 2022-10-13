@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/drawable/bg_loading.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/bg_popup_dialog.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/circle_indicator.xml" value="0.1635" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1785" />
+        <entry key="app/src/main/res/drawable/ic_baseline_phone_iphone_24.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ic_bg_category.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_device_not_select.xml" value="0.187" />
         <entry key="app/src/main/res/drawable/ic_device_selected.xml" value="0.187" />
@@ -28,9 +30,10 @@
         <entry key="app/src/main/res/layout/fragment_splash_header.xml" value="0.40260416666666665" />
         <entry key="app/src/main/res/layout/fragment_splash_login.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/fragment_yes_no_dialog.xml" value="0.264945652173913" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.2543822146216332" />
         <entry key="app/src/main/res/layout/item_device_logged.xml" value="0.264945652173913" />
         <entry key="app/src/main/res/layout/item_splash_activity.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/test_bg_btn.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/test_bg_btn.xml" value="0.2815049864007253" />
       </map>
     </option>
   </component>

@@ -8,11 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseFragment;
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.Category;
 import com.example.dreamtale.network.dto.ContentSplash;
 import com.example.dreamtale.network.dto.DeviceInfo;
 
@@ -43,6 +46,8 @@ public class SplashFragmentContent extends BaseFragment<LoginPresenter, SplashAc
     protected TextView txtErrorLogin;
     @BindView(R.id.container_edt_username)
     protected LinearLayout containerEdtUsername;
+    @BindView(R.id.rcy_category)
+    protected RecyclerView rctCategory;
 
     public LinearLayout getContainerEdtUsername() {
         return containerEdtUsername;
@@ -118,6 +123,14 @@ public class SplashFragmentContent extends BaseFragment<LoginPresenter, SplashAc
 
     public void setRcySplash(ViewPager2 rcySplash) {
         this.rcySplash = rcySplash;
+    }
+
+    public void showCategory(List<Category> list) {
+        CategoryAdapter categoryAdapter = new CategoryAdapter(list, getViewContext());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getViewContext(), 2);
+        rctCategory.setVisibility(View.VISIBLE);
+        rctCategory.setLayoutManager(mLayoutManager);
+        rctCategory.setAdapter(categoryAdapter);
     }
 
     @Override
