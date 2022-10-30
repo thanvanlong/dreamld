@@ -23,6 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".ui.login.OnBoardingActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

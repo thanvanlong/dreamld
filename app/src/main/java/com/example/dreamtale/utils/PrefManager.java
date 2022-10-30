@@ -11,6 +11,7 @@ public class PrefManager {
     private static final String ACCESS_TOKEN = "ACCESS_TOKEN";
     private static final String REFRESH_TOKEN = "REFRESH_TOKEN";
     private static final String IS_LOGIN = "IS_LOGIN";
+    private static final String IS_FIRST_START = "IS_FIRST_START";
 
     public synchronized static SharedPreferences getPreference(Context context) {
         if (context != null) {
@@ -72,5 +73,27 @@ public class PrefManager {
         }
 
         return false;
+    }
+
+    public static boolean isFirstStart(Context context) {
+        SharedPreferences preferences = getPreference(context);
+
+        if (preferences != null) {
+            return preferences.getBoolean(IS_LOGIN, true);
+        }
+
+        return false;
+    }
+
+    public static void setIsFirstStart(Context context, boolean firstStart) {
+        if (context == null) {
+            return;
+        }
+        SharedPreferences preferences = getPreference(context);
+        if (preferences != null) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(IS_FIRST_START, firstStart);
+            editor.apply();
+        }
     }
 }

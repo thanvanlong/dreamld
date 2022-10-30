@@ -48,8 +48,6 @@ public class YesNoDialog extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         getDialog().setCanceledOnTouchOutside(false);
-//        int width = getResources().getDimensionPixelSize(R.dimen.popup_width);
-//        int height = getResources().getDimensionPixelSize(R.dimen.popup_height);
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return inflater.inflate(R.layout.fragment_yes_no_dialog, container, false);
     }

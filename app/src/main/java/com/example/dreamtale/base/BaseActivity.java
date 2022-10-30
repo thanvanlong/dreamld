@@ -15,7 +15,7 @@ import com.example.dreamtale.R;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView<T> {
 
     private T mPresenter;
     private Unbinder mUnbinder;
@@ -45,6 +45,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     public abstract int getLayoutId();
 
+    @Override
+    public BaseActivity getViewContext() {
+        return this;
+    }
+
     public void addFragment(int containerId, Fragment fragment, Bundle bundle, boolean addToBackStack, String tag) {
         if (bundle != null) {
             fragment.setArguments(bundle);
@@ -56,7 +61,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     public void addFragment(int containerId, Fragment fragment, boolean addToBackStack, String tag ){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.add(containerId, fragment, tag);
+        fragmentTransaction.replace(containerId, fragment, tag);
 
         if (addToBackStack) {
             fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());

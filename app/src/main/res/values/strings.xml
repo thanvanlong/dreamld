@@ -9,11 +9,20 @@
     <string name="login_facebook">Sign in with Facebook</string>
     <string name="login_google">Sign in with Google</string>
     <string name="loading">Loading</string>
-    <string name="go_to_login">go_to_login</string>
+    <string name="check_phone">check_phone</string>
     <string name="enter_username">ENTER YOUR NAME</string>
     <string name="device_manager">Manage Devices</string>
     <string name="device_logged">All devices are logged</string>
     <string name="select_all">Select all</string>
     <string name="logout">Logout</string>
     <string name="notify">Notification</string>
+    <string name="search">Search...</string>
+    <string name="forme">For me</string>
+    <string name="lib">Library</string>
+    <string name="forgot_pass"><u>Ooh. I have forgot password</u></string>
+    <string name="sign_facebook">Sign up with Facebook</string>
+    <string name="sign_google">Sign up with google</string>
+    <string name="question_already_account">Do you have an account ?</string>
+    <string name="txt_login"><u>Login here</u></string>
+    <string name="signup">Sign up</string>
 </resources>

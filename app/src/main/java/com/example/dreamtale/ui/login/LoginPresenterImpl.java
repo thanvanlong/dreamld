@@ -10,6 +10,7 @@ import com.example.dreamtale.base.BasePresenterImpl;
 import com.example.dreamtale.common.dialog.YesNoDialog;
 import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.Category;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.network.dto.ResponseDTO;
 import com.example.dreamtale.utils.DeviceUtils;
@@ -34,8 +35,6 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
             public void onError(String errorCode, String errorMessage) {
                 mView.loginFail(errorMessage);
                 DialogUtils.dismissProgressDialog(getViewContext());
-                Log.d("longtv", "onError: " + errorMessage);
-                Toast.makeText(getViewContext(), "Error", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -43,9 +42,9 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
                 DialogUtils.dismissProgressDialog(getViewContext());
                 if (data != null) {
                     mView.loginSuccess(data);
+                    PrefManager.saveAccessTokenInfo(getViewContext(), data.getAccessToken());
+                    PrefManager.saveRefreshTokenInfo(getViewContext(), data.getRefreshToken());
                 }
-                PrefManager.saveAccessTokenInfo(getViewContext(), data.getAccessToken());
-                PrefManager.saveRefreshTokenInfo(getViewContext(), data.getRefreshToken());
             }
 
             @Override
@@ -86,9 +85,8 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
         ServiceBuilder.getService().register(requestBody).enqueue(new BaseCallback<AuthRequestBody>() {
             @Override
             public void onError(String errorCode, String errorMessage) {
-                mView.loginFail(errorMessage);
                 DialogUtils.dismissProgressDialog(getViewContext());
-                Log.d("longtv", "onError: " + errorMessage);
+                mView.registerFail(errorMessage);
             }
 
             @Override
@@ -98,10 +96,27 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
                 deviceInfo.setDeviceId(m_androidId);
                 data.setDeviceInfo(deviceInfo);
                 doLogin(data);
-                DialogUtils.dismissProgressDialog(getViewContext());
-                Log.d("longtv", "onResponse: register" + data.toString());
+                getListCategory();
             }
 
+        });
+    }
+
+    public void getListCategory() {
+        DialogUtils.showProgressDialog(getViewContext());
+
+        ServiceBuilder.getService().getListCategory().enqueue(new BaseCallback<List<Category>>() {
+            @Override
+            public void onError(String errorCode, String errorMessage) {
+                DialogUtils.dismissProgressDialog(getViewContext());
+                DialogUtils.showToastMessage(errorMessage, getViewContext(), false);
+            }
+
+            @Override
+            public void onResponse(List<Category> data) {
+                DialogUtils.dismissProgressDialog(getViewContext());
+                mView.registerSuccess(data);
+            }
         });
     }
 
@@ -112,12 +127,14 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
 
             @Override
             public void onError(String errorCode, String errorMessage) {
+                DialogUtils.dismissProgressDialog(getViewContext());
                 Log.d("longtv", "onError: " + errorMessage);
             }
 
             @Override
             public void onResponse(AuthRequestBody data) {
-
+                DialogUtils.dismissProgressDialog(getViewContext());
+                mView.isPhoneNonExist();
             }
 
             @Override

@@ -32,6 +32,9 @@ public class AuthRequestBody implements Serializable {
         this.username = username;
     }
 
+    public AuthRequestBody() {
+    }
+
     public String getPhone() {
         return phone;
     }

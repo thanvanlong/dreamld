@@ -8,7 +8,7 @@ import com.example.dreamtale.base.BaseFragment;
 
 import butterknife.BindView;
 
-public class SplashFragmentHeader extends BaseFragment<LoginPresenter, SplashActivity> {
+public class SplashFragmentHeader extends BaseFragment<LoginPresenter, OnBoardingActivity> {
 
     @BindView(R.id.img_header)
     protected ImageView imgHeader;

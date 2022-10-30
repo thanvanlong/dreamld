@@ -28,9 +28,9 @@ public class ServiceBuilder {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         long nomalTimeout = 15;
         OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(nomalTimeout, TimeUnit.SECONDS)
                 .readTimeout(nomalTimeout, TimeUnit.SECONDS)
                 .writeTimeout(nomalTimeout, TimeUnit.SECONDS)
+                .connectTimeout(nomalTimeout, TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .retryOnConnectionFailure(true)
                 .addInterceptor(new Interceptor() {

@@ -35,7 +35,7 @@
             android:shadowColor="@color/black"
             android:text="@string/btn_login"
             android:textColor="@color/black"
-            android:tag="@string/go_to_login"
+            android:tag="@string/check_phone"
             android:textSize="15sp" />
 
         <Button

@@ -8,7 +8,7 @@ import com.example.dreamtale.base.BaseFragment;
 
 import butterknife.BindView;
 
-public class SplashFragmentLoginContent extends BaseFragment<LoginPresenter, SplashActivity> {
+public class SplashFragmentLoginContent extends BaseFragment<LoginPresenter, OnBoardingActivity> {
 
     @BindView(R.id.btn_login_fb)
     protected Button btnLoginFb;

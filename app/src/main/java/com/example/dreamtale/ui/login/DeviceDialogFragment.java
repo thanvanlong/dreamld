@@ -67,6 +67,7 @@ public class DeviceDialogFragment extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         getDialog().setCanceledOnTouchOutside(false);
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return inflater.inflate(R.layout.fragment_devices_manager, container, false);
     }
 

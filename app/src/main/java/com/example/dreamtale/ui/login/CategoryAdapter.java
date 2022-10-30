@@ -2,18 +2,27 @@ package com.example.dreamtale.ui.login;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamtale.R;
+import com.example.dreamtale.common.view.CategoryView;
 import com.example.dreamtale.network.dto.Category;
 
 import java.util.List;
@@ -25,6 +34,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Category> categoryList;
     private Context mContext;
+
+    private static CategoryAdapter mInstance;
+
+    public static CategoryAdapter getInstance() {
+        return mInstance;
+    }
+
     public CategoryAdapter(List<Category> categoryList, Context context) {
         this.mContext = context;
         this.categoryList = categoryList;
@@ -34,20 +50,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
+        mInstance = this;
         return new ViewHolder(view);
     }
 
+    @SuppressLint({"ResourceAsColor", "ClickableViewAccessibility"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.e("longtv", "onBindViewHolder: " + categoryList.size() );
-        if (position != 0) {
-            int colorId = mContext.getResources().getColor(R.color.dark_blue);
-            holder.cardView.setCardBackgroundColor(colorId);
+        Category category = categoryList.get(position);
+        if (category.isSelected()) {
+            Drawable unwrappedDrawable = AppCompatResources.getDrawable(mContext, R.drawable.bg_category_selected);
+            holder.cardView.setBackground(unwrappedDrawable);
+            holder.txtCategoryName.setTextColor(ContextCompat.getColor(mContext, R.color.black));
+        } else {
+            Drawable unwrappedDrawable = AppCompatResources.getDrawable(mContext, R.drawable.test);
+            holder.cardView.setBackground(unwrappedDrawable);
+            holder.txtCategoryName.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         }
-        holder.cardView.setCardElevation(10);
-        holder.imgCategory.setImageResource(R.drawable.ic_libs);
-        holder.txtCategoryName.setText("Animals");
-//        holder.txtCategoryName.setTextColor(R.color.white);
+
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                category.setSelected(!category.isSelected());
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
@@ -62,10 +90,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         @BindView(R.id.img_category)
         ImageView imgCategory;
         @BindView(R.id.card_view)
-        CardView cardView;
+        LinearLayout cardView;
         @BindView(R.id.txt_category_name)
         TextView txtCategoryName;
-
+        @BindView(R.id.container_item)
+        RelativeLayout container;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

@@ -1,6 +1,7 @@
 package com.example.dreamtale.network;
 
 import com.example.dreamtale.network.dto.AuthRequestBody;
+import com.example.dreamtale.network.dto.Category;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.network.dto.ResponseDTO;
 
@@ -27,4 +28,7 @@ public interface DreamService {
 
     @POST("/api/v1/auth/logout")
     Call<ResponseDTO<List<DeviceInfo>>> logout(@Body List<DeviceInfo> deviceInfo);
+
+    @GET("")
+    Call<ResponseDTO<List<Category>>> getListCategory();
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.example.dreamtale.common.view.CategoryView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/test"
+        android:weightSum="6"
+        android:padding="20dp"
+        android:id="@+id/item"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_weight="2">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The Wonderful Adventures of Nils"
+                android:fontFamily="@font/manofik_bold"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:paddingVertical="0dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selma Longtv"
+                android:fontFamily="@font/gt_walshiem"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gt_walshiem"
+                android:textSize="10sp"
+                android:text="Chapter 5. The trip of LBee"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+    </com.example.dreamtale.common.view.CategoryView>
+    <com.example.dreamtale.common.view.CategoryView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_txt"
+        android:clickable="true"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item"
+        android:paddingVertical="0dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:progress="70"
+        android:progressDrawable="@drawable/style_seekbar"
+        android:thumb="@drawable/ic_thumb_seekbar" />
+</RelativeLayout>
