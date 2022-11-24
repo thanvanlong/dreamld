@@ -1,6 +1,5 @@
 package com.example.dreamtale.ui.login;
 
-import static com.example.dreamtale.utils.AuthUtils.validatePass;
 import static com.example.dreamtale.utils.AuthUtils.validatePhone;
 
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +17,8 @@ import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseFragment;
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.Category;
+import com.example.dreamtale.network.dto.CategoryDTO;
+import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.utils.DeviceUtils;
 import com.example.dreamtale.utils.DialogUtils;
@@ -51,7 +53,12 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
     @BindView(R.id.layout_txt)
     protected LinearLayout layoutTxt;
 
+    CategoryAdapter categoryAdapter;
 
+    int currentPage = 1;
+    int totalPage = 0;
+    boolean isLoading = false;
+    List<Category> list = new ArrayList<>();
     @Override
     public int getLayoutId() {
         return R.layout.fragment_signup;
@@ -69,12 +76,12 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
                 Log.e("longtv", "onClick: " + btnSignup.getTag() );
                 switch (btnSignup.getTag().toString()){
                     case "check_phone":
-//                        if (validatePhone(edtPhone.getText().toString())) {
-//                            getPresenter().checkPhoneNumber(edtPhone.getText().toString());
-//                        } else {
-//                            DialogUtils.showToastMessage("Phone number is invalid", getViewContext(), false);
-//                        }
-                        registerSuccess(new ArrayList<>());
+                        if (validatePhone(edtPhone.getText().toString())) {
+                            getPresenter().checkPhoneNumber(edtPhone.getText().toString());
+                        } else {
+                            DialogUtils.showToastMessage("Phone number is invalid", getViewContext(), false);
+                        }
+//                        registerSuccess(new ArrayList<>());
                         break;
                     case "create_account":
                         DeviceInfo deviceInfo = DeviceUtils.getDeviceInfo(getViewContext());
@@ -94,6 +101,26 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
             @Override
             public void onClick(View view) {
                 getViewContext().addFragment(R.id.frg_login, new LoginFragment(), true, LoginFragment.class.getSimpleName() );
+            }
+        });
+
+        rcyCategory.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                GridLayoutManager layoutManager = (GridLayoutManager) rcyCategory.getLayoutManager();
+
+                int v1 = layoutManager.getChildCount();
+                int v2 = layoutManager.getItemCount();
+                int v3 = layoutManager.findFirstCompletelyVisibleItemPosition();
+
+                if (v1 + v3 > v2 && !isLoading && currentPage <= totalPage) {
+                    currentPage ++;
+                    isLoading = true;
+                    getPresenter().getListCategory(10, currentPage);
+                }
+
             }
         });
     }
@@ -132,37 +159,37 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
     }
 
     @Override
+    public void getListCategorySuccess(ContentDTO<Category> data) {
+        containerButton.setVisibility(View.GONE);
+        layoutTxt.setVisibility(View.GONE);
+        isLoading = false;
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getViewContext(), 2);
+        rcyCategory.setVisibility(View.VISIBLE);
+        rcyCategory.setLayoutManager(layoutManager);
+        if (list.size() == 0) {
+            list.addAll(data.getContentList());
+            categoryAdapter = new CategoryAdapter(list, getViewContext());
+            rcyCategory.setAdapter(categoryAdapter);
+            currentPage = data.getMetaData().getCurrentPage();
+        } else {
+            list.addAll(data.getContentList());
+            categoryAdapter.notifyDataSetChanged();
+            rcyCategory.scrollToPosition(currentPage * 10);
+        }
+        totalPage = data.getMetaData().getTotalPages();
+
+    }
+
+    @Override
     public void registerSuccess(List<Category> data) {
         containerButton.setVisibility(View.GONE);
         layoutTxt.setVisibility(View.GONE);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getViewContext(), 2);
-        Log.e("longtv", "registerSuccess:"  );
-        rcyCategory.setVisibility(View.VISIBLE);
-        rcyCategory.setLayoutManager(layoutManager);
-        List<Category> categoryList = new ArrayList<>();
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
-        categoryList.add(new Category());
+        getPresenter().getListCategory(10, currentPage);
 
         btnSignup.setTag("create_name");
+        btnSignup.setText("next");
 
-        rcyCategory.setAdapter(new CategoryAdapter(categoryList, getViewContext()));
+
 
     }
 

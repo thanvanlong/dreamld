@@ -6,21 +6,21 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
-public class ListeningContentView extends LinearLayout {
-    public ListeningContentView(Context context) {
+public class ListeningContentBoxView extends LinearLayout {
+    public ListeningContentBoxView(Context context) {
         super(context);
     }
 
-    public ListeningContentView(Context context, @Nullable AttributeSet attrs) {
+    public ListeningContentBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ListeningContentView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ListeningContentBoxView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public ListeningContentView(Context context, AttributeSet attrs, int defStyleAttr,
-                                int defStyleRes) {
+    public ListeningContentBoxView(Context context, AttributeSet attrs, int defStyleAttr,
+                                   int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

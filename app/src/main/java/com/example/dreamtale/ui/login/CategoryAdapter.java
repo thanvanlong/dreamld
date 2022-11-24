@@ -3,10 +3,7 @@ package com.example.dreamtale.ui.login;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,13 +13,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dreamtale.R;
-import com.example.dreamtale.common.view.CategoryView;
 import com.example.dreamtale.network.dto.Category;
 
 import java.util.List;
@@ -63,10 +57,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.cardView.setBackground(unwrappedDrawable);
             holder.txtCategoryName.setTextColor(ContextCompat.getColor(mContext, R.color.black));
         } else {
-            Drawable unwrappedDrawable = AppCompatResources.getDrawable(mContext, R.drawable.test);
+            Drawable unwrappedDrawable = AppCompatResources.getDrawable(mContext, R.drawable.bg_category);
             holder.cardView.setBackground(unwrappedDrawable);
             holder.txtCategoryName.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         }
+
+        holder.txtCategoryName.setText(category.getName());
 
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override

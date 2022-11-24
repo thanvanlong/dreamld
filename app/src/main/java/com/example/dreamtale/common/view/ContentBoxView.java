@@ -6,20 +6,20 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
-public class ContentView extends LinearLayout {
-    public ContentView(Context context) {
+public class ContentBoxView extends LinearLayout {
+    public ContentBoxView(Context context) {
         super(context);
     }
 
-    public ContentView(Context context, @Nullable AttributeSet attrs) {
+    public ContentBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public ContentView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ContentBoxView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public ContentView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ContentBoxView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -28,7 +28,7 @@ public class ContentView extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        this.setMeasuredDimension(widthMeasureSpec, (int) (widthSize * 9 /16));
+        this.setMeasuredDimension(widthMeasureSpec, (int) (widthSize * 4/3));
 
     }
 }

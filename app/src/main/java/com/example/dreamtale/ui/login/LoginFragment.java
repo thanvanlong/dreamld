@@ -15,6 +15,8 @@ import com.example.dreamtale.base.BaseFragment;
 import com.example.dreamtale.base.BaseView;
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.Category;
+import com.example.dreamtale.network.dto.CategoryDTO;
+import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.ui.home.HomeActivity;
 import com.example.dreamtale.utils.AuthUtils;
@@ -52,6 +54,12 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
 
     public static LoginFragment getmInstance() {
         return mInstance;
+    }
+
+    public static synchronized  LoginFragment newInstance() {
+        LoginFragment loginFragment = new LoginFragment();
+        mInstance = loginFragment;
+        return loginFragment;
     }
 
     @Override
@@ -133,7 +141,6 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
     @OnTextChanged(R.id.edt_pass)
     public void edtPassChange() {
         if (!edtPass.getText().toString().matches("")) {
-            Log.e("longtv", "edtPassChange: " );
             imgShowPass.setVisibility(View.VISIBLE);
         } else {
             imgShowPass.setVisibility(View.GONE);
@@ -153,7 +160,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
 
     private void gotoHome() {
         Intent intent = new Intent(getBaseActivity(), HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getBaseActivity().finish();
         getViewContext().getSupportFragmentManager().popBackStack();
@@ -178,6 +185,12 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
     public void isPhoneNonExist() {
 
     }
+
+    @Override
+    public void getListCategorySuccess(ContentDTO<Category> categoryDTO) {
+
+    }
+
 
     @Override
     public void registerSuccess(List<Category> data) {

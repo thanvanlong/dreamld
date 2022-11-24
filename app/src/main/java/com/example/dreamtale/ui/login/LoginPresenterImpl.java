@@ -11,6 +11,9 @@ import com.example.dreamtale.common.dialog.YesNoDialog;
 import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.Category;
+import com.example.dreamtale.network.dto.CategoryDTO;
+import com.example.dreamtale.network.dto.Content;
+import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.network.dto.DeviceInfo;
 import com.example.dreamtale.network.dto.ResponseDTO;
 import com.example.dreamtale.utils.DeviceUtils;
@@ -91,31 +94,29 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
 
             @Override
             public void onResponse(AuthRequestBody data) {
-                String m_androidId = Settings.Secure.getString(getViewContext().getContentResolver(), Settings.Secure.ANDROID_ID);
-                DeviceInfo deviceInfo = DeviceUtils.getDeviceInfo(getViewContext());
-                deviceInfo.setDeviceId(m_androidId);
-                data.setDeviceInfo(deviceInfo);
-                doLogin(data);
-                getListCategory();
+                if (!data.getAccessToken().matches("")) {
+                    PrefManager.saveAccessTokenInfo(getViewContext(), data.getAccessToken());
+                }
+
+                getListCategory(10, 1);
             }
 
         });
     }
 
-    public void getListCategory() {
+    public void getListCategory(int size, int currentPage) {
         DialogUtils.showProgressDialog(getViewContext());
 
-        ServiceBuilder.getService().getListCategory().enqueue(new BaseCallback<List<Category>>() {
+        ServiceBuilder.getService().getListCategory(size, currentPage).enqueue(new BaseCallback<ContentDTO<Category>>() {
             @Override
             public void onError(String errorCode, String errorMessage) {
-                DialogUtils.dismissProgressDialog(getViewContext());
-                DialogUtils.showToastMessage(errorMessage, getViewContext(), false);
+                Toast.makeText(getViewContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onResponse(List<Category> data) {
+            public void onResponse(ContentDTO<Category> data) {
                 DialogUtils.dismissProgressDialog(getViewContext());
-                mView.registerSuccess(data);
+                mView.getListCategorySuccess(data);
             }
         });
     }

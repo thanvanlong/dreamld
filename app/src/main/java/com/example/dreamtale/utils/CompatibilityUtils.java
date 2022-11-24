@@ -9,8 +9,10 @@ public class CompatibilityUtils {
     public static final float MARGIN_PERCENT = 0.03f;
     public static final float SPACING_PERCENT = 0.04f;
     public static final float NUMBER_STORY_MOBILE = 2.3f;
-    public static final float NUMBER_LISTENING_MOBILE = 1.2f;
-    public static final float NUMBER_CONTENT_MOBILE = 2.5f;
+    public static final float NUMBER_BOX_LISTENING_MOBILE = 1.2f;
+    public static final float NUMBER_BOX_CONTENT_MOBILE = 2.5f;
+    public static final float NUMBER_BOX_CONTENT_RELATED_MOBILE = 2f;
+    public static final float NUMBER_BOX_AUTHOR_MOBILE = 3f;
 
 
     public static boolean isTablet(Context context) {
@@ -35,7 +37,7 @@ public class CompatibilityUtils {
         int screenWidth = DeviceUtils.getDeviceSizePortrait((Activity) context).x;
         float margin = getScreenMargin(context);
         float spacing = getItemSpacing(context) * 0;
-        int width = (int) ((screenWidth - spacing - margin) / NUMBER_LISTENING_MOBILE);
+        int width = (int) ((screenWidth - spacing - margin) / NUMBER_BOX_LISTENING_MOBILE);
         return width;
     }
 
@@ -44,7 +46,24 @@ public class CompatibilityUtils {
         int screenWidth = DeviceUtils.getDeviceSizePortrait((Activity) context).x;
         float margin = getScreenMargin(context);
         float spacing = getItemSpacing(context) * 0;
-        int width = (int) ((screenWidth - spacing - margin) / NUMBER_CONTENT_MOBILE);
+        int width = (int) ((screenWidth - spacing - margin) / NUMBER_BOX_CONTENT_MOBILE);
         return width;
     }
+
+    public static int getWidthContentRelatedItem(Context context) {
+        int screenWidth = DeviceUtils.getDeviceSizePortrait((Activity) context).x;
+        float margin = getScreenMargin(context);
+        float spacing = getItemSpacing(context) * 0;
+        int width = (int) ((screenWidth - spacing - margin) / NUMBER_BOX_CONTENT_RELATED_MOBILE);
+        return width;
+    }
+
+    public static int getWidthAuthorItem(Context context) {
+        int screenWidth = DeviceUtils.getDeviceSizePortrait((Activity) context).x;
+        float margin = getScreenMargin(context);
+        float spacing = getItemSpacing(context) * 0;
+        int width = (int) ((screenWidth - spacing - margin) / NUMBER_BOX_AUTHOR_MOBILE);
+        return width;
+    }
+
 }

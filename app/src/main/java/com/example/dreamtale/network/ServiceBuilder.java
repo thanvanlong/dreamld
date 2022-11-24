@@ -26,7 +26,7 @@ public class ServiceBuilder {
     private synchronized static Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        long nomalTimeout = 15;
+        long nomalTimeout = 5;
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(nomalTimeout, TimeUnit.SECONDS)
                 .writeTimeout(nomalTimeout, TimeUnit.SECONDS)
@@ -40,6 +40,7 @@ public class ServiceBuilder {
                         Request.Builder builder = original.newBuilder();
                         builder.addHeader("Content-Type", "application/json");
                         if (!PrefManager.getAccessToken(App.getInstance()).matches("")){
+                            Log.e("longtv", "intercept: " + PrefManager.getAccessToken(App.getInstance()) );
                             builder.addHeader("Authorization", "Bearer " + PrefManager.getAccessToken(App.getInstance()));
                         }
                         Request request = builder.method(original.method(), original.body()).build();

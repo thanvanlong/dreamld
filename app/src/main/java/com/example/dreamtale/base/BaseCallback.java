@@ -20,6 +20,12 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
         Log.d("longtv", "onResponse: base " + response.isSuccessful());
         String responseCode = NETWORK_ERROR;
         String message = "";
+
+        if (body != null && !body.isSuccess()) {
+            onError(body.getErrorCode(), body.getMessage());
+            return;
+        }
+
         if (response.isSuccessful() && body != null) {
             responseCode = body.getErrorCode();
             message = body.getMessage();
@@ -50,7 +56,8 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
                     case ResponseCode.ACCOUNT_EXIST:
                         onAccountExist(message);
                         return;
-
+                    case ResponseCode.NETWORK_ERROR:
+                        onError(body.getErrorCode(), body.getMessage());
                     default:
                         onError(body.getErrorCode(), body.getMessage());
                         return;
@@ -86,7 +93,8 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
 
     @Override
     public void onFailure(Call<ResponseDTO<T>> call, Throwable t) {
-
+        Log.e("longtv", "onFailure: time out" );
+        onError("400", "Có lỗi xảy ra vui lòng thử lại!");
     }
 
 
@@ -110,6 +118,7 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
         String REFRESH_TOKEN = "412";
         String LIMITED_DEVICE  = "LIMIT_DEVICE";
         String ACCOUNT_EXIST= "PHONE_EXIST";
+        String NETWORK_ERROR = "NETWORK_ERROR";
         String ACCOUNT_NON_EXIST = "USER_NON_EXIST";
     }
 }

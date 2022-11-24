@@ -12,5 +12,6 @@
     <color name="light_blue">#3A3B82</color>
     <color name="night_blue">#1D1B3F</color>
     <color name="blue_white">#7a7ed9</color>
+    <color name="red_heart">#ba2318</color>
     <color name="top_item_package">#4e4e4e</color>
 </resources>

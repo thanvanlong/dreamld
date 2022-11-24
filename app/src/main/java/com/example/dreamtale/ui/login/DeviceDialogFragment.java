@@ -3,6 +3,7 @@ package com.example.dreamtale.ui.login;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseCallback;
 import com.example.dreamtale.network.ServiceBuilder;
 import com.example.dreamtale.network.dto.DeviceInfo;
+import com.example.dreamtale.ui.home.HomeBoxAdapter;
 import com.example.dreamtale.utils.DialogUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -103,14 +106,15 @@ public class DeviceDialogFragment extends DialogFragment {
                     List<DeviceInfo> target2 = gson.fromJson(json, listType);
                     Log.d("longtv", "onClick: 1 " + target2.size());
                     DialogUtils.showProgressDialog(getActivity());
-                    ServiceBuilder.getService().logout(infoList).enqueue(new BaseCallback<List<DeviceInfo>>() {
+                    ServiceBuilder.getService().logout(infoList).enqueue(new BaseCallback<Object>() {
                         @Override
                         public void onError(String errorCode, String errorMessage) {
-                            Log.e("longtv", "onError: logout" );
+                            DialogUtils.dismissProgressDialog(getActivity());
+//                            listener.onRemoveSuccess();
                         }
 
                         @Override
-                        public void onResponse(List<DeviceInfo> data) {
+                        public void onResponse(Object data) {
                             DialogUtils.dismissProgressDialog(getActivity());
                             listener.onRemoveSuccess();
                         }

@@ -31,7 +31,8 @@ android {
 
     productFlavors {
         dev {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.8.127:1111\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.8.127:4000\"")
+//            buildConfigField("String", "BASE_URL", "\"http://192.168.43.108:4000\"")
         }
 
         product {
@@ -70,4 +71,6 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }

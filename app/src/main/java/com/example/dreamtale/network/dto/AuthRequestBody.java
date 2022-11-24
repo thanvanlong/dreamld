@@ -32,6 +32,8 @@ public class AuthRequestBody implements Serializable {
         this.username = username;
     }
 
+
+
     public AuthRequestBody() {
     }
 

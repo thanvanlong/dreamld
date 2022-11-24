@@ -13,24 +13,24 @@ import androidx.appcompat.content.res.AppCompatResources;
 import com.example.dreamtale.R;
 import com.example.dreamtale.ui.login.CategoryAdapter;
 
-public class CategoryView extends LinearLayout{
+public class CategoryBoxView extends LinearLayout{
 
-    public CategoryView(Context context) {
+    public CategoryBoxView(Context context) {
         super(context);
         init(context);
     }
 
-    public CategoryView(Context context, @Nullable AttributeSet attrs) {
+    public CategoryBoxView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public CategoryView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CategoryBoxView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    public CategoryView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CategoryBoxView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }

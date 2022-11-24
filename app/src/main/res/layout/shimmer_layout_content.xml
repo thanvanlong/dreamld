@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/tv_tt1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        android:background="#333333"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:id="@+id/shimmer_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tt1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingVertical="10dp"
+        android:paddingLeft="10dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:background="#333333"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tv_tt2"
+        app:layout_constraintTop_toBottomOf="@id/shimmer_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        android:background="#333333"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:id="@+id/shimmer_content_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tt2"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingVertical="10dp"
+        android:paddingLeft="10dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:background="#333333"
+            android:layout_height="match_parent">
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tv_tt_3"
+        app:layout_constraintTop_toBottomOf="@id/shimmer_content_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        android:background="#333333"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:id="@+id/shimmer_content_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tt_3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingVertical="10dp"
+        android:paddingLeft="10dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="3.8"
+            android:layout_height="wrap_content">
+            <com.example.dreamtale.common.view.ContentBoxView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#333333"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:background="#333333"
+            android:layout_height="match_parent">
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

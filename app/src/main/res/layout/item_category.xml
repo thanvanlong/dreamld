@@ -24,11 +24,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <com.example.dreamtale.common.view.CategoryView
+    <com.example.dreamtale.common.view.CategoryBoxView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/test"
+        android:background="@drawable/bg_category"
         android:layout_margin="15dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -45,5 +45,5 @@
             android:textSize="17sp"
             android:text="Animals"
             />
-    </com.example.dreamtale.common.view.CategoryView>
+    </com.example.dreamtale.common.view.CategoryBoxView>
 </androidx.constraintlayout.widget.ConstraintLayout>

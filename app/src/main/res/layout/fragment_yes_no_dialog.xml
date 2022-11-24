@@ -22,9 +22,10 @@
         <TextView
             android:id="@+id/txt_content_notification"
             android:layout_width="match_parent"
-            android:padding="5dp"
+            android:padding="15dp"
+            android:textAlignment="center"
             android:inputType="textMultiLine"
-            android:layout_height="100dp"/>
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
