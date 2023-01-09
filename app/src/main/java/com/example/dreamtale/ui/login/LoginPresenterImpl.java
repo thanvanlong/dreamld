@@ -89,13 +89,16 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
             @Override
             public void onError(String errorCode, String errorMessage) {
                 DialogUtils.dismissProgressDialog(getViewContext());
-                mView.registerFail(errorMessage);
+                Log.e("longtv", "onError: register"  );
+                Toast.makeText(getViewContext(), errorMessage, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onResponse(AuthRequestBody data) {
                 if (!data.getAccessToken().matches("")) {
+                    Log.e("longtv", data.getAccessToken());
                     PrefManager.saveAccessTokenInfo(getViewContext(), data.getAccessToken());
+                    PrefManager.setLogin(getViewContext(), true);
                 }
 
                 getListCategory(10, 1);
@@ -129,6 +132,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<LoginView> implements 
             @Override
             public void onError(String errorCode, String errorMessage) {
                 DialogUtils.dismissProgressDialog(getViewContext());
+                DialogUtils.showToastMessage(errorMessage, getViewContext(), true);
                 Log.d("longtv", "onError: " + errorMessage);
             }
 

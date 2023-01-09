@@ -19,6 +19,8 @@ import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.utils.PrefManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -50,9 +52,12 @@ public class HomeBoxFragment extends BaseFragment<HomePresenter, HomeActivity> i
 
     @Override
     public void onPrepareLayout() {
-        if (PrefManager.getHomeData(getViewContext()) == null) {
+        Log.e("anth", PrefManager.getHomeData(getViewContext()) + " size?");
+//        if (HomeActivity.getInstance() != null && HomeActivity.getInstance().getDataHomeBox() == null) {
             loadData();
-        }
+//        } else {
+//            loadHomeBox(HomeActivity.getInstance().getDataHomeBox());
+//        }
         swipeRefreshLayout.setOnRefreshListener(this);
         rcyContent.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -93,7 +98,7 @@ public class HomeBoxFragment extends BaseFragment<HomePresenter, HomeActivity> i
     }
 
     public void loadMoreData() {
-        getPresenter().getHomeData(5, currentPage);
+//        getPresenter().getHomeData(5, currentPage);
     }
 
     @Override
@@ -109,11 +114,11 @@ public class HomeBoxFragment extends BaseFragment<HomePresenter, HomeActivity> i
         boxes = new ArrayList<>();
         GridLayoutManager layoutManager = new GridLayoutManager(getViewContext(), 1);
         rcyContent.setLayoutManager(layoutManager);
-        List<Box> boxes = new ArrayList<>();
         if (boxes.size() != 0) {
             boxes.clear();
         }
-        boxes.addAll(data.getContentList());
+        rcyContent.setVisibility(View.VISIBLE);
+        boxes.addAll(Box.removeBoxEmpty(data.getContentList()));
 
         homeBoxAdapter = new HomeBoxAdapter(getViewContext(), boxes);
         rcyContent.setAdapter(homeBoxAdapter);
@@ -136,10 +141,24 @@ public class HomeBoxFragment extends BaseFragment<HomePresenter, HomeActivity> i
             return;
         }
         Log.e("longtv", "onRefresh: " );
+        rcyContent.setVisibility(View.GONE);
         isRefreshing = true;
         btnRetry.setVisibility(View.GONE);
         shimmerLayout.setVisibility(View.VISIBLE);
         loadData();
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e("longtv", "onStop: " );
+//        PrefManager.clearHomeCache(getViewContext());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        PrefManager.clearHomeCache(getViewContext());
     }
 }

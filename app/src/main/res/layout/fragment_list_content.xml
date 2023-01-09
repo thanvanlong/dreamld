@@ -8,19 +8,24 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <include layout="@layout/shimmer_layout_content"/>
-        </com.facebook.shimmer.ShimmerFrameLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_list_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:padding="10dp"/>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/shimmer_layout_content"/>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcy_list_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="10dp"/>
+        </RelativeLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

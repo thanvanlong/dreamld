@@ -14,7 +14,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
-
+    <FrameLayout
+        android:id="@+id/fragment_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
@@ -40,7 +45,7 @@
                 android:id="@+id/rcy_home_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="81dp"/>
+                android:paddingBottom="50dp"/>
         </RelativeLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

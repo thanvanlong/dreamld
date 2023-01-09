@@ -20,13 +20,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceBuilder {
     private static final String BASE_URL = BuildConfig.BASE_URL;
+    private static final String BASE_URL_PAYMENT = BuildConfig.BASE_URL_PAYMENT;
 
     private static Retrofit sInstance;
+    private static Retrofit sInstancePayment;
     private static DreamService dreamService;
+    private static DreamService dreamServicePayment;
     private synchronized static Retrofit getRetrofit() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        long nomalTimeout = 5;
+        long nomalTimeout = 15;
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(nomalTimeout, TimeUnit.SECONDS)
                 .writeTimeout(nomalTimeout, TimeUnit.SECONDS)
@@ -62,10 +65,56 @@ public class ServiceBuilder {
         return sInstance;
     }
 
+
+    private synchronized static Retrofit getRetrofitPayment() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        long nomalTimeout = 15;
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(nomalTimeout, TimeUnit.SECONDS)
+                .writeTimeout(nomalTimeout, TimeUnit.SECONDS)
+                .connectTimeout(nomalTimeout, TimeUnit.SECONDS)
+                .addInterceptor(interceptor)
+                .retryOnConnectionFailure(true)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request original = chain.request();
+                        Request.Builder builder = original.newBuilder();
+                        builder.addHeader("Content-Type", "application/json");
+                        Request request = builder.method(original.method(), original.body()).build();
+                        return chain.proceed(request);
+                    }
+                })
+                .build();
+
+        if (sInstancePayment == null) {
+            // User agent
+            sInstancePayment = new Retrofit.Builder()
+                    .baseUrl(BASE_URL_PAYMENT)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+
+        }
+        return sInstancePayment;
+    }
+
+
+
     public static DreamService getService() {
         if (dreamService == null) {
             dreamService = getRetrofit().create(DreamService.class);
         }
         return dreamService;
+    }
+
+    public static DreamService getServicePayment() {
+        if (dreamServicePayment == null) {
+            dreamServicePayment = getRetrofitPayment().create(DreamService.class);
+        }
+
+        return dreamServicePayment;
     }
 }

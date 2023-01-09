@@ -28,6 +28,7 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/tv_name_story"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="The Wonderful Adventures of Nils"
@@ -44,6 +45,7 @@
                 android:textSize="10sp"/>
 
             <TextView
+                android:id="@+id/tv_name_ep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gt_walshiem"
@@ -67,6 +69,7 @@
 <!--        -->
 <!--    </com.example.dreamtale.common.view.ListeningContentBoxView>-->
     <com.example.dreamtale.common.view.ListeningContentBoxView
+        android:id="@+id/item_ripple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -75,6 +78,7 @@
         android:clickable="true"/>
 
     <SeekBar
+        android:id="@+id/seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="0dp"

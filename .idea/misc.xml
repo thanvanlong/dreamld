@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/bg_on_loading.xml" value="0.2575" />
         <entry key="app/src/main/res/drawable/bg_popup_dialog.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/bg_rotate_content_detail.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/bg_search.xml" value="0.138" />
         <entry key="app/src/main/res/drawable/bg_seekbar_progress.xml" value="0.218" />
         <entry key="app/src/main/res/drawable/bg_seekbar_unprogress.xml" value="0.218" />
         <entry key="app/src/main/res/drawable/bg_time_remind.xml" value="0.152" />
@@ -33,7 +34,9 @@
         <entry key="app/src/main/res/drawable/group_16.xml" value="0.21" />
         <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.152" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1785" />
+        <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.2765" />
         <entry key="app/src/main/res/drawable/ic_baseline_phone_iphone_24.xml" value="0.1785" />
+        <entry key="app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_bg_category.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_del_circle.xml" value="0.152" />
         <entry key="app/src/main/res/drawable/ic_device_not_select.xml" value="0.187" />
@@ -47,6 +50,7 @@
         <entry key="app/src/main/res/drawable/ic_library_1.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_list.xml" value="0.152" />
         <entry key="app/src/main/res/drawable/ic_repeat.xml" value="0.152" />
+        <entry key="app/src/main/res/drawable/ic_repeat_active.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable/ic_show_pass.xml" value="0.1765" />
         <entry key="app/src/main/res/drawable/ic_thumb_seekbar.xml" value="0.218" />
         <entry key="app/src/main/res/drawable/ic_trip_arrow_left.xml" value="0.152" />
@@ -58,14 +62,15 @@
         <entry key="app/src/main/res/drawable/test_btn.xml" value="0.1345" />
         <entry key="app/src/main/res/font/font_heading.xml" value="0.32395833333333335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33133817870884996" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2543822146216332" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21008403361344538" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.2543822146216332" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.35141509433962265" />
         <entry key="app/src/main/res/layout/bg_btn_confirm.xml" value="0.264945652173913" />
         <entry key="app/src/main/res/layout/bg_loading.xml" value="0.17300724637681159" />
+        <entry key="app/src/main/res/layout/fragment_buy_package.xml" value="0.2099187687045746" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.3374094202898551" />
-        <entry key="app/src/main/res/layout/fragment_center_controller.xml" value="0.2535271483539974" />
-        <entry key="app/src/main/res/layout/fragment_comment.xml" value="0.2535271483539974" />
+        <entry key="app/src/main/res/layout/fragment_center_controller.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_comment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_content.xml" value="0.11786038077969176" />
         <entry key="app/src/main/res/layout/fragment_contetn.xml" value="0.2535271483539974" />
         <entry key="app/src/main/res/layout/fragment_devices_manager.xml" value="0.264945652173913" />
@@ -75,7 +80,10 @@
         <entry key="app/src/main/res/layout/fragment_listening.xml" value="0.2535271483539974" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.3180846515604959" />
         <entry key="app/src/main/res/layout/fragment_media_controller.xml" value="0.2543822146216332" />
+        <entry key="app/src/main/res/layout/fragment_more_setting.xml" value="0.3180846515604959" />
         <entry key="app/src/main/res/layout/fragment_onboarding.xml" value="0.3180846515604959" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.2099187687045746" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash_content.xml" value="0.3104166666666667" />
         <entry key="app/src/main/res/layout/fragment_splash_footer.xml" value="0.25" />
@@ -84,12 +92,16 @@
         <entry key="app/src/main/res/layout/fragment_story_detail.xml" value="0.2535271483539974" />
         <entry key="app/src/main/res/layout/fragment_yes_no_dialog.xml" value="0.264945652173913" />
         <entry key="app/src/main/res/layout/item_author.xml" value="0.12654980761008977" />
+        <entry key="app/src/main/res/layout/item_buy_package.xml" value="0.2099187687045746" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.3673126220703125" />
         <entry key="app/src/main/res/layout/item_comment.xml" value="0.2535271483539974" />
         <entry key="app/src/main/res/layout/item_content_box.xml" value="0.2535271483539974" />
         <entry key="app/src/main/res/layout/item_device_logged.xml" value="0.264945652173913" />
         <entry key="app/src/main/res/layout/item_filter.xml" value="0.2543822146216332" />
+        <entry key="app/src/main/res/layout/item_history_search.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_listening_story.xml" value="0.2543822146216332" />
+        <entry key="app/src/main/res/layout/item_search.xml" value="0.2535271483539974" />
+        <entry key="app/src/main/res/layout/item_setting.xml" value="0.3189397178281317" />
         <entry key="app/src/main/res/layout/item_splash_activity.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_toolbar.xml" value="0.2419837537409149" />
         <entry key="app/src/main/res/layout/item_top_navigation.xml" value="0.2543822146216332" />

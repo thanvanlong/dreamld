@@ -31,7 +31,8 @@ android {
 
     productFlavors {
         dev {
-            buildConfigField("String", "BASE_URL", "\"http://192.168.8.127:4000\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.75.77:4000\"")
+            buildConfigField("String", "BASE_URL_PAYMENT", "\"http://192.168.75.193:8080\"")
 //            buildConfigField("String", "BASE_URL", "\"http://192.168.43.108:4000\"")
         }
 

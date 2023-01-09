@@ -32,6 +32,7 @@ public class HomeBoxAdapter extends RecyclerView.Adapter<HomeBoxAdapter.ViewHold
     private Context context;
     private List<Box> boxes = new ArrayList<>();
 
+
     public HomeBoxAdapter(Context context, List<Box> boxes) {
         this.context = context;
         this.boxes = boxes;
@@ -49,7 +50,7 @@ public class HomeBoxAdapter extends RecyclerView.Adapter<HomeBoxAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Box box = boxes.get(position);
-        Log.e("anth", "onBindViewHolder: box " + box.getContentList().size() );
+        Log.e("anth", "onBindViewHolder: box " + box.getContentList().size() + box.getType() );
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         HorizontalItemDecoration horizontalItemDecoration = new HorizontalItemDecoration(CompatibilityUtils.getItemSpacing(context));
         holder.tvName.setText(box.getName());
@@ -67,6 +68,10 @@ public class HomeBoxAdapter extends RecyclerView.Adapter<HomeBoxAdapter.ViewHold
             case AUTHOR:
                 int widthAuthor = CompatibilityUtils.getWidthContentItem(context);
                 holder.rcyContent.setAdapter(new AuthorAdapter(box.getContentList(), widthAuthor, context));
+                break;
+            default:
+                int widthDefault = CompatibilityUtils.getWidthContentItem(context);
+                holder.rcyContent.setAdapter(new ContentAdapter(box.getContentList(), widthDefault, context));
                 break;
         }
     }

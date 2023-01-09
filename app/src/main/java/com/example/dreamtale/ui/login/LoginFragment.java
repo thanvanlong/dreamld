@@ -91,8 +91,8 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
 //                    DialogUtils.showToastMessage("Phone number or password is invalid", getViewContext(), false);
 //                    return;
 //                }
-//                getPresenter().doLogin(authRequestBody);
-                gotoHome();
+                getPresenter().doLogin(authRequestBody);
+//                gotoHome();
             }
         });
 
@@ -154,7 +154,7 @@ public class LoginFragment extends BaseFragment<LoginPresenter, LoginActivity> i
 
     @Override
     public void loginSuccess(AuthRequestBody data) {
-        DialogUtils.showToastMessage(data.toString(), getViewContext(), false);
+        PrefManager.setLogin(getViewContext(), true);
         gotoHome();
     }
 

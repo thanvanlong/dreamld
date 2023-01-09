@@ -104,19 +104,25 @@
             android:fontFamily="@font/gt_walshiem"/>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_view"
+            android:layout_height="match_parent"
+            android:id="@+id/swipe_refresh_layout">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible">
-                <include layout="@layout/shimmer_layout_home"/>
-            </com.facebook.shimmer.ShimmerFrameLayout>
+                android:layout_height="match_parent">
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+                    <include layout="@layout/shimmer_layout_home"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcy_related"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_related"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 

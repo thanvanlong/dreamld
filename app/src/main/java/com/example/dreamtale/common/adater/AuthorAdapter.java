@@ -54,8 +54,10 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Content content = contentList.get(position);
-        ImageUtils.loadImageOval(mContext, holder.imgAuthor, content.getImg());
-        holder.tvNameAuthor.setText(content.getAuthor());
+        ImageUtils.loadImageOval(mContext, holder.imgAuthor, "https://taimienphi.vn/tmp/cf/aut/anh-gai-xinh-1.jpg");
+//        ImageUtils.loadImageOval(mContext, holder.imgAuthor, content.getImg());
+        holder.tvNameAuthor.setText("Mr LBee");
+//        holder.tvNameAuthor.setText(content.getAuthor());
     }
 
     @Override

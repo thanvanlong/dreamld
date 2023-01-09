@@ -1,6 +1,7 @@
 package com.example.dreamtale.ui.login;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.dreamtale.R;
@@ -11,6 +12,16 @@ import com.example.dreamtale.utils.PrefManager;
 
 
 public class SplashActivity extends BaseActivity<LoginPresenter> {
+    boolean isFromNotify = false;
+
+    public boolean isFromNotify() {
+        return isFromNotify;
+    }
+
+    public void setFromNotify(boolean fromNotify) {
+        isFromNotify = fromNotify;
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_splash;
@@ -18,16 +29,23 @@ public class SplashActivity extends BaseActivity<LoginPresenter> {
 
     @Override
     public void onPrepareLayout() {
-       if (PrefManager.isFirstStart(getViewContext())) {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if ( bundle != null && bundle.getString("notification") != null) {
+            isFromNotify = true;
+        }
+
+       if (PrefManager.isFirstStart(getViewContext()) || !PrefManager.isLogged(getViewContext())) {
            final Handler handler = new Handler();
            handler.postDelayed(new Runnable() {
                @Override
                public void run() {
+                   PrefManager.setIsFirstStart(getViewContext(), false);
                    startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
                    SplashActivity.this.finish();
                }
            }, 3000);
-       } else {
+       } else if (PrefManager.isLogged(getViewContext())) {
            // doautologin
            final Handler handler = new Handler();
            handler.postDelayed(new Runnable() {
@@ -47,9 +65,10 @@ public class SplashActivity extends BaseActivity<LoginPresenter> {
     public void gotoHome() {
         Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("from_notification", isFromNotify);
         startActivity(intent);
         SplashActivity.this.finish();
-        getViewContext().getSupportFragmentManager().popBackStack();
+//        getViewContext().getSupportFragmentManager().popBackStack();
     }
 
 

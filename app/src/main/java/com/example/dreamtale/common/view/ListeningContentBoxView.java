@@ -28,7 +28,7 @@ public class ListeningContentBoxView extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        this.setMeasuredDimension(widthMeasureSpec, (int) (widthSize * 7 /16));
+        this.setMeasuredDimension(widthMeasureSpec, (int) (widthSize * 6 /16));
 
     }
 }

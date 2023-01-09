@@ -11,11 +11,15 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.dreamtale.common.constant.Constant;
 import com.example.dreamtale.common.fragment.CommentFragment;
+import com.example.dreamtale.common.fragment.ListContentFragment;
+import com.example.dreamtale.network.dto.Content;
 import com.example.dreamtale.ui.login.LoginFragment;
 
 public class MediaControllerPagerAdapter extends FragmentStateAdapter {
-    public MediaControllerPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    private Content content;
+    public MediaControllerPagerAdapter(@NonNull FragmentActivity fragmentActivity, Content content) {
         super(fragmentActivity);
+        this.content = content;
     }
 
     @NonNull
@@ -23,15 +27,23 @@ public class MediaControllerPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new CommentFragment();
+                CommentFragment commentFragment = CommentFragment.newInstance();
+                return commentFragment;
             case 1:
                 CenterMediaControllerFragment centerMediaControllerFragment = CenterMediaControllerFragment.newInstance();
                 Bundle bundle = new Bundle();
                 bundle.putBoolean(Constant.Extras.CAN_SEARCH, false);
+                bundle.putSerializable(Constant.Extras.DATA, content);
+                centerMediaControllerFragment.setArguments(bundle);
                 return centerMediaControllerFragment;
 
             default:
-                return new LoginFragment();
+                ListContentFragment listContentFragment = ListContentFragment.newInstance();
+                Bundle bd = new Bundle();
+                bd.putBoolean(Constant.Extras.CAN_SEARCH, false);
+                bd.putSerializable(Constant.Extras.DATA, content);
+                listContentFragment.setArguments(bd);
+                return listContentFragment;
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.dreamtale.ui.login;
 
 import static com.example.dreamtale.utils.AuthUtils.validatePhone;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.example.dreamtale.network.dto.Category;
 import com.example.dreamtale.network.dto.CategoryDTO;
 import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.network.dto.DeviceInfo;
+import com.example.dreamtale.ui.home.HomeActivity;
 import com.example.dreamtale.utils.DeviceUtils;
 import com.example.dreamtale.utils.DialogUtils;
 
@@ -34,6 +36,8 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
     protected EditText edtPass;
     @BindView(R.id.edt_phone)
     protected EditText edtPhone;
+    @BindView(R.id.edt_name)
+    protected EditText edtName;
     @BindView(R.id.btn_signup)
     protected Button btnSignup;
     @BindView(R.id.txt_login)
@@ -46,6 +50,8 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
     protected LinearLayout containerEdtPhone;
     @BindView(R.id.container_edt_pass)
     protected LinearLayout containerEdtPass;
+    @BindView(R.id.container_edt_name)
+    protected LinearLayout containerEdtName;
     @BindView(R.id.container_btn)
     protected LinearLayout containerButton;
     @BindView(R.id.rcy_category)
@@ -85,12 +91,17 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
                         break;
                     case "create_account":
                         DeviceInfo deviceInfo = DeviceUtils.getDeviceInfo(getViewContext());
-                        AuthRequestBody authRequestBody = new AuthRequestBody(edtPhone.getText().toString(), edtPass.getText().toString(), deviceInfo);
+                        AuthRequestBody authRequestBody = new AuthRequestBody(edtPhone.getText().toString(), edtPass.getText().toString(), deviceInfo, edtName.getText().toString());
                         getPresenter().doRegister(authRequestBody);
                         break;
 
-                    case "create_name":
+                    case "go_to_home":
                         //TODO
+                        Intent intent = new Intent(getViewContext(), HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        intent.putExtra("from_notification", isFromNotify);
+                        startActivity(intent);
+                        getViewContext().finish();
                         break;
 
                 }
@@ -156,10 +167,12 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
         btnSignup.setTag("create_account");
         containerEdtPhone.setVisibility(View.GONE);
         containerEdtPass.setVisibility(View.VISIBLE);
+        containerEdtName.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void getListCategorySuccess(ContentDTO<Category> data) {
+        btnSignup.setTag("go_to_home");
         containerButton.setVisibility(View.GONE);
         layoutTxt.setVisibility(View.GONE);
         isLoading = false;
@@ -174,9 +187,9 @@ public class SignupFragment extends BaseFragment<LoginPresenter, LoginActivity> 
         } else {
             list.addAll(data.getContentList());
             categoryAdapter.notifyDataSetChanged();
-            rcyCategory.scrollToPosition(currentPage * 10);
         }
         totalPage = data.getMetaData().getTotalPages();
+
 
     }
 

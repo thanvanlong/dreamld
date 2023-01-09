@@ -1,5 +1,7 @@
 package com.example.dreamtale.common.fragment;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,8 +12,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.dreamtale.R;
 import com.example.dreamtale.base.BaseFragment;
 import com.example.dreamtale.common.adater.ContentAdapter;
+import com.example.dreamtale.common.constant.Constant;
 import com.example.dreamtale.common.view.HorizontalItemDecoration;
 import com.example.dreamtale.network.dto.Box;
+import com.example.dreamtale.network.dto.Comment;
 import com.example.dreamtale.network.dto.Content;
 import com.example.dreamtale.network.dto.ContentDTO;
 import com.example.dreamtale.ui.home.HomeActivity;
@@ -19,6 +23,7 @@ import com.example.dreamtale.ui.home.HomeBoxAdapter;
 import com.example.dreamtale.ui.home.HomeBoxView;
 import com.example.dreamtale.ui.home.HomePresenter;
 import com.example.dreamtale.ui.home.HomePresenterImpl;
+import com.example.dreamtale.ui.mediaplayer.CenterMediaControllerFragment;
 import com.example.dreamtale.ui.mediaplayer.MediaControlPresenter;
 import com.example.dreamtale.ui.mediaplayer.MediaControlPresenterImpl;
 import com.example.dreamtale.ui.mediaplayer.MediaControlView;
@@ -36,17 +41,31 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
     RecyclerView rcyContentList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout refreshLayout;
-    @BindView(R.id.shimmer_content)
+    @BindView(R.id.shimmer_layout)
     ShimmerFrameLayout shimmerFrameLayout;
 
-    private List<Content> contentList;
+    private List<Content> contentList = new ArrayList<>();
     int currentPage = 1;
     private boolean isRefreshing = false;
     private boolean isLoading = false;
     private int totalPage = 0;
+    private Content content;
 
-    public ListContentFragment(List<Content> contentList) {
-        this.contentList = contentList;
+    public ListContentFragment() {
+    }
+
+    private static ListContentFragment instance;
+
+    public static ListContentFragment getInstance() {
+        return instance;
+    }
+
+    public static synchronized ListContentFragment newInstance() {
+        ListContentFragment centerMediaControllerFragment = new ListContentFragment();
+        instance = centerMediaControllerFragment;
+
+        return centerMediaControllerFragment;
+
     }
 
     @Override
@@ -56,7 +75,12 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
 
     @Override
     public void onPrepareLayout() {
-        loadData();
+        Log.e("longtv", "onPrepareLayout: when" );
+        Bundle bundle = getArguments();
+        refreshLayout.setOnRefreshListener(this);
+        content = (Content) bundle.getSerializable(Constant.Extras.DATA);
+        Log.e("anth", "onPrepareLayout: " + content.getId());
+        loadData((int) content.getId());
 
         rcyContentList.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -88,8 +112,9 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
         return new MediaControlPresenterImpl(this);
     }
 
-    public void loadData() {
-        getPresenter().getContentList(10, 10, 1);
+    public void loadData(int id) {
+        Log.e("longtv", "loadData: list content" );
+        getPresenter().getContentList(id, 10, 1);
     }
 
     public void loadMoreData() {
@@ -104,7 +129,7 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
         }
 
         isRefreshing = true;
-        loadData();
+        loadData((int) content.getId());
     }
 
     @Override
@@ -112,10 +137,8 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
         shimmerFrameLayout.setVisibility(View.GONE);
         isRefreshing = false;
         refreshLayout.setRefreshing(false);
-        contentList = data.getContentList();
-
-        int width = CompatibilityUtils.getWidthContentRelatedItem(getViewContext());
-        ContentAdapter contentAdapter = new ContentAdapter(contentList, width, getViewContext());
+        contentList.addAll(data.getContentList());
+        ContentAdapter contentAdapter = new ContentAdapter(contentList, getViewContext());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getViewContext(), 2);
 
         rcyContentList.setLayoutManager(layoutManager);
@@ -123,6 +146,21 @@ public class ListContentFragment extends BaseFragment<MediaControlPresenter, Hom
         rcyContentList.setAdapter(contentAdapter);
 
         totalPage = data.getMetaData().getTotalPages();
+
+    }
+
+    @Override
+    public void loadComment(ContentDTO<Comment> data) {
+
+    }
+
+    @Override
+    public void doCommentSuccess(Comment data) {
+
+    }
+
+    @Override
+    public void popupMessage() {
 
     }
 }

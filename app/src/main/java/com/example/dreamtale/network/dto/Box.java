@@ -1,7 +1,10 @@
 package com.example.dreamtale.network.dto;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Box {
@@ -55,13 +58,33 @@ public class Box {
     }
 
     public enum Type {
+        @SerializedName("recommend_audio_book")
         AUDIO_BOOK,
+        @SerializedName("music")
         MUSIC,
+        @SerializedName("history_audio_book")
         AUDIO_LISTENING,
+        @SerializedName("aaa")
         MUSIC_LISTENING,
+        @SerializedName("recommend_author")
         AUTHOR,
-        AUDIO_DETAIL
+        @SerializedName("sss")
+        AUDIO_DETAIL,
+        @SerializedName("favourite_auido_book")
+        FAVOURITE_AUDIO_BOOK
 
+    }
+
+    public static List<Box> removeBoxEmpty(@NonNull List<Box> data) {
+        List<Box> boxes = new ArrayList<>();
+        for (Box box :
+                data) {
+            if (box.getContentList().size() != 0) {
+                boxes.add(box);
+            }
+        }
+
+        return boxes;
     }
 
     @Override

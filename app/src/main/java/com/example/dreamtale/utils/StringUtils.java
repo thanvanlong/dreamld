@@ -7,7 +7,7 @@ public class StringUtils {
         int minutes = (int) ((totalSecs % 3600) / 60);
         int seconds = (int) (totalSecs % 60);
 
-        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        String timeString = String.format("%02d:%02d", minutes, seconds);
 
         return timeString;
     }

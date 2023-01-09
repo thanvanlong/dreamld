@@ -19,6 +19,8 @@ public class AuthRequestBody implements Serializable {
     private String accessToken;
     @SerializedName("refreshToken")
     private String refreshToken;
+    @SerializedName("avatar")
+    private String avtUrl;
 
     public AuthRequestBody(String phoneNumber, String password, DeviceInfo deviceInfo) {
         this.phone = phoneNumber;
@@ -32,9 +34,23 @@ public class AuthRequestBody implements Serializable {
         this.username = username;
     }
 
-
+    public AuthRequestBody(String phone, String password, DeviceInfo deviceInfo, String username) {
+        this.phone = phone;
+        this.password = password;
+        this.deviceInfo = deviceInfo;
+        this.username = username;
+    }
 
     public AuthRequestBody() {
+    }
+
+
+    public String getAvtUrl() {
+        return avtUrl;
+    }
+
+    public void setAvtUrl(String avtUrl) {
+        this.avtUrl = avtUrl;
     }
 
     public String getPhone() {

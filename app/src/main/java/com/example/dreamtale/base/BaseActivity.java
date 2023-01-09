@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dreamtale.R;
+import com.example.dreamtale.ui.search.SearchFragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -60,7 +61,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     public void addFragment(int containerId, Fragment fragment, boolean addToBackStack, String tag ){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
+        if (getSupportFragmentManager().findFragmentByTag(SearchFragment.class.getSimpleName()) != null) {
+            fragmentTransaction.remove(getSupportFragmentManager().findFragmentByTag(SearchFragment.class.getSimpleName()));
+        }
         fragmentTransaction.replace(containerId, fragment, tag);
 
         if (addToBackStack) {

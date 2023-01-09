@@ -60,7 +60,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHold
 
         Content content = contentList.get(position);
 
-        ImageUtils.loadImageCorner(mContext, holder.imgContent, contentList.get(position).getCoverImg());
+        ImageUtils.loadImageCorner(mContext, holder.imgContent, "https://taimienphi.vn/tmp/cf/aut/anh-gai-xinh-1.jpg");
+//        ImageUtils.loadImageCorner(mContext, holder.imgContent, contentList.get(position).getCoverImg());
         holder.tvNameContent.setText(content.getName());
         holder.tvNameContent.setSelected(true);
 

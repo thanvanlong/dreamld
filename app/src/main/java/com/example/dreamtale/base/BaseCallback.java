@@ -1,6 +1,7 @@
 package com.example.dreamtale.base;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.dreamtale.network.dto.AuthRequestBody;
 import com.example.dreamtale.network.dto.ResponseDTO;
@@ -21,10 +22,16 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
         String responseCode = NETWORK_ERROR;
         String message = "";
 
-        if (body != null && !body.isSuccess()) {
-            onError(body.getErrorCode(), body.getMessage());
+        if (body != null && !body.isSuccess() && body.getErrorCode().equals(ResponseCode.NEED_BUY) ) {
+            Log.e("longtv", "onResponse: need buy" );
+            onNeedBuy(body.getMessage());
             return;
         }
+//        if (body != null && !body.isSuccess() && !body.getErrorCode().equals(ResponseCode.LIMITED_DEVICE) ) {
+//            onError(body.getErrorCode(), body.getMessage());
+//            return;
+//        }
+
 
         if (response.isSuccessful() && body != null) {
             responseCode = body.getErrorCode();
@@ -54,10 +61,15 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
                         return;
 
                     case ResponseCode.ACCOUNT_EXIST:
-                        onAccountExist(message);
+                        onError(body.getErrorCode(), body.getMessage());
                         return;
                     case ResponseCode.NETWORK_ERROR:
                         onError(body.getErrorCode(), body.getMessage());
+                        return;
+                    case ResponseCode.NEED_BUY:
+                        onNeedBuy(body.getMessage());
+                        return;
+
                     default:
                         onError(body.getErrorCode(), body.getMessage());
                         return;
@@ -93,12 +105,15 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
 
     @Override
     public void onFailure(Call<ResponseDTO<T>> call, Throwable t) {
-        Log.e("longtv", "onFailure: time out" );
+        Log.e("longtv", "onFailure: time out " + t.getMessage() );
         onError("400", "Có lỗi xảy ra vui lòng thử lại!");
     }
 
 
     public abstract void onError(String errorCode, String errorMessage);
+    public void onNeedBuy(String message) {
+
+    };
 
     public abstract void onResponse(T data);
     protected void onMessage(String message) {
@@ -120,6 +135,7 @@ public abstract class BaseCallback<T> implements Callback<ResponseDTO<T>> {
         String ACCOUNT_EXIST= "PHONE_EXIST";
         String NETWORK_ERROR = "NETWORK_ERROR";
         String ACCOUNT_NON_EXIST = "USER_NON_EXIST";
+        String NEED_BUY = "333";
     }
 }
 
