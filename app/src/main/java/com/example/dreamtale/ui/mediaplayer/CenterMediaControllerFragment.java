@@ -292,7 +292,7 @@ public class CenterMediaControllerFragment extends BaseFragment<HomePresenter, H
     private void intiExoplayer(String url ) {
         player = new ExoPlayer.Builder(getViewContext()).build();
         playerView.setPlayer(player);
-        MediaItem firstItem = MediaItem.fromUri(Uri.parse(url));
+        MediaItem firstItem = MediaItem.fromUri(Uri.parse("https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8"));
         player.addMediaItem(firstItem);
         player.prepare();
         player.addListener(this);
